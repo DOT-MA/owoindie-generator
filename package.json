@@ -5,7 +5,6 @@
   "homepage": "https://github.com/aXises/owoindie-generator",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "bootstrap": "^4.2.1",
     "cookie-parser": "^1.4.3",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
@@ -13,6 +12,7 @@
     "morgan": "^1.9.1",
     "pug": "^2.0.3",
     "react": "^16.7.0",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.7.0",
     "react-pose": "^4.0.6",
     "reset-css": "^4.0.1",
@@ -23,7 +23,7 @@
   "scripts": {
     "bundle": "./node_modules/.bin/webpack",
     "start": "npm run bundle && cross-env NODE_ENV=production NODE_PATH=./ ts-node server.ts",
-    "start-hot": "nodemon -e jsx --ignore dist/ --exec npm start"
+    "start-hot": "nodemon -e tsx,ts --ignore dist/ --exec npm start"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "@types/react-dom": "^16.0.11",
     "awesome-typescript-loader": "^5.2.1",
     "source-map-loader": "^0.2.4",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.3.1"
   }
 }
