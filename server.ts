@@ -71,9 +71,7 @@ server.on("error", onError);
 server.on("listening", onListening);
 
 // middleware setup
-app.use(lessMiddleware(__dirname + "/public", {
-    dest: "dist/",
-}));
+app.use(lessMiddleware(__dirname + "/public"));
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dotma-resources"));
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
