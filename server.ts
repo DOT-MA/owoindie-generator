@@ -74,6 +74,7 @@ server.on("listening", onListening);
 app.use(lessMiddleware(__dirname + "/public"));
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dotma-resources"));
+app.use(express.static(__dirname + "/resources"));
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
 app.use("/dist", express.static(__dirname + "/dist"));
 
