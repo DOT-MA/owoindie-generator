@@ -1,1 +1,44 @@
+@import "mixins";
 @import "typography";
+
+body {
+    background-color: #eeeeee;
+}
+
+main > header {
+    width: 100%;
+    height: 50px;
+    padding: 0 30px 0 30px;
+    background-color: #fdcbdebf;
+    border-bottom: 1px solid grey;
+    h1 {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+    }
+    .centerYFlex;
+}
+
+.panel {
+    height: 100vh;
+}
+
+.part-grouping {
+    margin: 5px 0 5px 0;
+    h1 {
+        font-size: 1em;
+        text-align: right;
+        margin: 0 0 0 20px;
+    }
+    header {
+        width: 100%;
+        height: 50px;
+        background-color: grey;
+        border-radius: 10px;
+        cursor: pointer;
+        .centerYFlex;
+    }
+    .part-list {
+        width: 100%;
+        background-color: lightblue;
+    }
+}
