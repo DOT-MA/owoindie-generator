@@ -19,7 +19,8 @@ main > header {
 }
 
 .panel {
-    height: 100vh;
+    height: 1000px;
+    overflow: auto;
 }
 
 .part-grouping {
@@ -39,6 +40,19 @@ main > header {
     }
     .part-list {
         width: 100%;
-        background-color: lightblue;
+        padding: 0 10px 0 10px;
+        overflow: hidden;
+        .part-container {
+            margin-top: 10px;
+        }
+        .part {
+            height: 200px;
+            background-color: pink;
+            cursor: pointer;
+            &:hover {
+                border: 1px solid white;
+            }
+            .inner-border;
+        }
     }
 }

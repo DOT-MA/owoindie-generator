@@ -3,6 +3,8 @@ import pose from "react-pose";
 import {Container, Row, Col} from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
 
+import OwoindiePart from "../components/OwoindiePart";
+
 type GroupProps = {
     groupName: string,
 };
@@ -13,7 +15,7 @@ type GroupState = {
 
 const PartList = pose.section({
     isOpen: {
-        height: 500,
+        height: "auto",
     },
     isClosed: {
         height: 0
@@ -39,7 +41,24 @@ export default class SelectionPanel extends React.Component<GroupProps, GroupSta
                 </Row>
                 <Row>
                     <PartList className="part-list" pose={this.state.isExpanded ? "isOpen" : "isClosed"}>
-
+                        <Row>
+                            <Col lg={4} className="part-container">
+                                <OwoindiePart />
+                            </Col>
+                            <Col lg={4} className="part-container">
+                                <OwoindiePart />
+                            </Col>
+                            <Col lg={4} className="part-container">
+                                <OwoindiePart />
+                            </Col>
+                            <Col lg={4} className="part-container">
+                                <OwoindiePart />
+                            </Col>
+                            <Col lg={4} className="part-container">
+                                <OwoindiePart />
+                            </Col>
+                        </Row>
+                        
                     </PartList>
                 </Row>
             </Container>
