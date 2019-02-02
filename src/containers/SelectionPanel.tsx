@@ -9,8 +9,8 @@ export default class SelectionPanel extends React.Component<React.HTMLAttributes
     public render(): React.ReactNode {
         return (
             <section className="panel">
-                <PartGrouping groupName="GROUP A" />
-                <PartGrouping groupName="GROUP B" />
+                <PartGrouping groupName="Eyes" />
+                <PartGrouping groupName="Eyebrows" />
             </section>
         );
     }

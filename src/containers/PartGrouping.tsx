@@ -3,7 +3,7 @@ import pose from "react-pose";
 import {Container, Row, Col} from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
 
-import OwoindiePart from "../components/OwoindiePart";
+import OwoindiePart, { PartData } from "../components/OwoindiePart";
 
 type GroupProps = {
     groupName: string,
@@ -11,6 +11,7 @@ type GroupProps = {
 
 type GroupState = {
     isExpanded: boolean,
+    groupData: PartData[],
 }
 
 const PartList = pose.section({
@@ -27,7 +28,25 @@ export default class SelectionPanel extends React.Component<GroupProps, GroupSta
         super(props);
         this.state = {
             isExpanded: false,
+            groupData: [],
         }
+    }
+
+    public async getGroupData() {
+        const data = await fetch(`/getpartdata/${this.props.groupName.toLowerCase()}`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+        return await data.json();
+    }
+
+    public componentDidMount() {
+        this.getGroupData().then((data: PartData[]) => {
+            this.setState({groupData: data});
+        })
     }
 
     public render(): React.ReactNode {
@@ -42,21 +61,15 @@ export default class SelectionPanel extends React.Component<GroupProps, GroupSta
                 <Row>
                     <PartList className="part-list" pose={this.state.isExpanded ? "isOpen" : "isClosed"}>
                         <Row>
-                            <Col lg={4} className="part-container">
-                                <OwoindiePart />
-                            </Col>
-                            <Col lg={4} className="part-container">
-                                <OwoindiePart />
-                            </Col>
-                            <Col lg={4} className="part-container">
-                                <OwoindiePart />
-                            </Col>
-                            <Col lg={4} className="part-container">
-                                <OwoindiePart />
-                            </Col>
-                            <Col lg={4} className="part-container">
-                                <OwoindiePart />
-                            </Col>
+                            {
+                                this.state.groupData.map((elem, index) => {
+                                    return (
+                                        <Col lg={4} className="part-container" key={index}>
+                                            <OwoindiePart partName={elem.partName} partPath={elem.partPath}/>
+                                        </Col>
+                                    )
+                                })
+                            }
                         </Row>
                         
                     </PartList>
