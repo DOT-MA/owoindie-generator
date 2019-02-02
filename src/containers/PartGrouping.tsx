@@ -2,16 +2,14 @@ import * as React from "react";
 import pose from "react-pose";
 import {Container, Row, Col} from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
+import { OwoindiePartData } from "../SharedTypes";
+import { GroupProps, CallbackMethods } from "src/SharedTypes"
 
-import OwoindiePart, { PartData } from "../components/OwoindiePart";
-
-type GroupProps = {
-    groupName: string,
-};
+import OwoindiePart from "../components/OwoindiePart";
 
 type GroupState = {
     isExpanded: boolean,
-    groupData: PartData[],
+    groupData: OwoindiePartData[],
 }
 
 const PartList = pose.section({
@@ -23,7 +21,7 @@ const PartList = pose.section({
     }
 });
 
-export default class SelectionPanel extends React.Component<GroupProps, GroupState> {
+export default class SelectionPanel extends React.Component<GroupProps & CallbackMethods, GroupState> {
     public constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +42,7 @@ export default class SelectionPanel extends React.Component<GroupProps, GroupSta
     }
 
     public componentDidMount() {
-        this.getGroupData().then((data: PartData[]) => {
+        this.getGroupData().then((data: OwoindiePartData[]) => {
             this.setState({groupData: data});
         })
     }
@@ -65,7 +63,12 @@ export default class SelectionPanel extends React.Component<GroupProps, GroupSta
                                 this.state.groupData.map((elem, index) => {
                                     return (
                                         <Col lg={4} className="part-container" key={index}>
-                                            <OwoindiePart partName={elem.partName} partPath={elem.partPath}/>
+                                            <OwoindiePart
+                                                partName={elem.partName}
+                                                partPath={elem.partPath}
+                                                groupName={this.props.groupName}
+                                                onPartSelect={this.props.onPartSelect}
+                                            />
                                         </Col>
                                     )
                                 })

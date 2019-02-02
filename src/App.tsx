@@ -2,13 +2,42 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import {Container, Row, Col} from "react-bootstrap";
+import { RenderingPanelProps } from "./SharedTypes";
 
 import SelectionPanel from "./containers/SelectionPanel"
 import RenderingPanel from "./containers/RenderingPanel"
 
-export default class App extends React.Component<{}, {}> {
+export default class App extends React.Component<{}, RenderingPanelProps> {
     public constructor(props) {
         super(props);
+        this.state = {
+            selectedParts: [{
+                partName: "base",
+                partPath: "base/owoindie-base.jpg",
+                groupName: "base",
+            }],
+        }
+    }
+
+    public onPartSelect(name: string, path: string, group: string): void {
+        let parts = this.state.selectedParts;
+        if (parts.findIndex((elem) => elem.partName === name) !== -1) {
+            return;
+        }
+        const index = parts.findIndex((elem) => elem.groupName === group)
+        if (index !== -1) {
+            parts.splice(index, 1);
+        }
+        parts = [...this.state.selectedParts,
+            {
+                partName: name,
+                partPath: path,
+                groupName: group,
+            }
+        ]
+        this.setState({
+            selectedParts: parts,
+        });
     }
 
     public render(): React.ReactNode {
@@ -20,10 +49,10 @@ export default class App extends React.Component<{}, {}> {
                 <Container fluid={true}>
                     <Row>
                         <Col lg={4}>
-                            <SelectionPanel />
+                            <SelectionPanel onPartSelect={this.onPartSelect.bind(this)} />
                         </Col>
                         <Col lg={8}>
-                            <RenderingPanel />
+                            <RenderingPanel selectedParts={this.state.selectedParts}/>
                         </Col>
                     </Row>
                 </Container>
