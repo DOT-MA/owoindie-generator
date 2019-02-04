@@ -21,6 +21,15 @@ const PartList = pose.section({
     }
 });
 
+const Arrow = pose.div({
+    isOpen: {
+        transform: "rotate(180deg)",
+    },
+    isClosed: {
+        transform: "rotate(0deg)",
+    }
+})
+
 export default class SelectionPanel extends React.Component<GroupProps & CallbackMethods & RenderingPanelProps, GroupState> {
     public constructor(props) {
         super(props);
@@ -80,7 +89,10 @@ export default class SelectionPanel extends React.Component<GroupProps & Callbac
                 <Row>
                     <header onClick={() => {this.setState({isExpanded: !this.state.isExpanded})}} style={{backgroundColor: this.props.tabColour}}>
                         <h1>{this.props.groupName.replace("_", " ")}</h1>
-                        <IoIosArrowDown />
+                        <Arrow className="arrow-container" pose={this.state.isExpanded ? "isOpen" : "isClosed"}>
+                            <IoIosArrowDown />
+                        </Arrow>
+                        
                     </header>
                 </Row>
                 <Row>
