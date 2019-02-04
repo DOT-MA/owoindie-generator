@@ -30,4 +30,5 @@ export enum GroupIndexMapping {
     HAIR_ACCESSORIES,
     EARS,
     HAIR,
+    NECK,
 }
