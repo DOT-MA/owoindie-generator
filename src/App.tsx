@@ -65,37 +65,13 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
             image: merged.replace("data:image/jpeg;base64,", ""),
             type: "base64"
         }
-            const res = await fetch("https://api.imgur.com/3/upload", {
-                method: "POST",
-                headers: {
-                    Authorization: `Client-ID ${process.env.REACT_APP_IMAGUR_ID}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-            const imagurData = (await res.json()).data;
-            const embedData = {
-                username: "OWOINDIE",
-                avatar_url: "https://raw.githubusercontent.com/DOT-MA/dotma-resources/master/images/alex/owoindie.jpg",
-                embeds: [
-                    {
-                        title: "OWO WHAT'S THIS",
-                        description: "WHO DID THIS LMAO!!",
-                        url: "https://owoindie-generator.herokuapp.com/",
-                        image: {
-                            url: imagurData.link,
-                        },
-                        timestamp: new Date(),
-                    }
-                ]
-            }
-            fetch(process.env.REACT_APP_DISCORD_WEBHOOK, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(embedData),
-            });
+        await fetch("/senddiscordwebhook", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
     }
 
     public render(): React.ReactNode {
