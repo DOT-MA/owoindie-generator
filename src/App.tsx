@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import {Container, Row, Col} from "react-bootstrap";
-import { RenderingPanelProps } from "./SharedTypes";
+import mergeImages from "merge-images";
 import { RenderingPanelProps, GroupIndexMapping } from "./SharedTypes";
 
 import SelectionPanel from "./containers/SelectionPanel"
