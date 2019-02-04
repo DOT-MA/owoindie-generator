@@ -1,8 +1,8 @@
 import * as React from "react";
 import PartGrouping from "./PartGrouping";
-import { CallbackMethods } from "src/SharedTypes"
+import { RenderingPanelProps, CallbackMethods, OwoindiePartData } from "src/SharedTypes"
 
-export default class SelectionPanel extends React.Component<CallbackMethods, {}> {
+export default class SelectionPanel extends React.Component<CallbackMethods & RenderingPanelProps, {}> {
     public constructor(props) {
         super(props);
     }

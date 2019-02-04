@@ -3,7 +3,7 @@ import pose from "react-pose";
 import {Container, Row, Col} from "react-bootstrap";
 import { IoIosArrowDown } from "react-icons/io";
 import { OwoindiePartData } from "../SharedTypes";
-import { GroupProps, CallbackMethods } from "src/SharedTypes"
+import { GroupProps, CallbackMethods, RenderingPanelProps } from "src/SharedTypes"
 
 import OwoindiePart from "../components/OwoindiePart";
 
@@ -21,7 +21,7 @@ const PartList = pose.section({
     }
 });
 
-export default class SelectionPanel extends React.Component<GroupProps & CallbackMethods, GroupState> {
+export default class SelectionPanel extends React.Component<GroupProps & CallbackMethods & RenderingPanelProps, GroupState> {
     public constructor(props) {
         super(props);
         this.state = {
@@ -47,12 +47,39 @@ export default class SelectionPanel extends React.Component<GroupProps & Callbac
         })
     }
 
+    public isSelected(partData: OwoindiePartData): boolean {
+        const currentlySelected = this.getSelectedPart();
+        return currentlySelected ? currentlySelected.partName === partData.partName : false;
+    }
+
+    public getSelectedPart(): OwoindiePartData {
+        return (this.props.selectedParts.filter((elem) => elem.groupName === this.props.groupName))[0];
+    }
+
+    public generateParts(): React.ReactNode {
+        return (
+            this.state.groupData.map((elem, index) => {
+                return (
+                    <Col lg={4} className="part-container" key={elem.groupName + elem.partName}>
+                        <OwoindiePart
+                            partName={elem.partName}
+                            partPath={elem.partPath}
+                            groupName={this.props.groupName}
+                            onPartSelect={this.props.onPartSelect}
+                            isSelected={this.isSelected(elem)}
+                        />
+                    </Col>
+                )
+            })
+        )
+    }
+
     public render(): React.ReactNode {
         return (
             <Container fluid={true} className="part-grouping">
                 <Row>
-                    <header onClick={() => {this.setState({isExpanded: !this.state.isExpanded})}}>
-                        <h1>{this.props.groupName}</h1>
+                    <header onClick={() => {this.setState({isExpanded: !this.state.isExpanded})}} style={{backgroundColor: this.props.tabColour}}>
+                        <h1>{this.props.groupName.replace("_", " ")}</h1>
                         <IoIosArrowDown />
                     </header>
                 </Row>
@@ -60,18 +87,7 @@ export default class SelectionPanel extends React.Component<GroupProps & Callbac
                     <PartList className="part-list" pose={this.state.isExpanded ? "isOpen" : "isClosed"}>
                         <Row>
                             {
-                                this.state.groupData.map((elem, index) => {
-                                    return (
-                                        <Col lg={4} className="part-container" key={index}>
-                                            <OwoindiePart
-                                                partName={elem.partName}
-                                                partPath={elem.partPath}
-                                                groupName={this.props.groupName}
-                                                onPartSelect={this.props.onPartSelect}
-                                            />
-                                        </Col>
-                                    )
-                                })
+                                this.generateParts()
                             }
                         </Row>
                         

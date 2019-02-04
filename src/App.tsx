@@ -21,7 +21,7 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
 
     public onPartSelect(name: string, path: string, group: string): void {
         let parts = this.state.selectedParts;
-        if (parts.findIndex((elem) => elem.partName === name) !== -1) {
+        if (parts.findIndex((elem) => (elem.partName === name) && (elem.groupName === group)) !== -1) {
             return;
         }
         const index = parts.findIndex((elem) => elem.groupName === group)
@@ -49,7 +49,10 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
                 <Container fluid={true}>
                     <Row>
                         <Col lg={4}>
-                            <SelectionPanel onPartSelect={this.onPartSelect.bind(this)} />
+                            <SelectionPanel
+                                onPartSelect={this.onPartSelect.bind(this)}
+                                selectedParts={this.state.selectedParts}
+                            />
                         </Col>
                         <Col lg={8}>
                             <RenderingPanel selectedParts={this.state.selectedParts}/>
