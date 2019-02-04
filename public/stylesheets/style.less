@@ -9,11 +9,24 @@ main > header {
     width: 100%;
     height: 50px;
     padding: 0 30px 0 30px;
-    background-color: #fdcbdebf;
+    background-color: #fb6363;
     border-bottom: 1px solid grey;
-    h1 {
+    display: flex;
+    justify-content: space-between;
+    h1, h6 {
         font-size: 1.5em;
         letter-spacing: 2px;
+        margin: 0;
+        color: white;
+    }
+    .share-button {
+        height: 100%;
+        margin-right: 50px;
+        cursor: pointer;
+        h6 {
+            font-size: 1em;
+        }
+        .centerYFlex;
     }
     .centerYFlex;
 }
@@ -39,8 +52,10 @@ main > header {
         cursor: pointer;
         justify-content: space-between;
         .centerYFlex;
-        svg {
+        .arrow-container {
             margin-right: 20px;
+        }
+        svg {
             color: white;
         }
     }
