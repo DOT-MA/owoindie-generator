@@ -49,11 +49,41 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
         });
     }
 
+    public async sendToDiscordWebhook() {
+        const selectedParts = this.state.selectedParts;
+        selectedParts.sort((a, b) => {
+            return a.zIndex - b.zIndex;
+        });
+        const images = [];
+        for (const part of selectedParts) {
+            images.push(part.partPath);
+        }
+        const merged = await mergeImages(images, {
+            format: "image/jpeg"
+        });
+        const data = {
+            image: merged.replace("data:image/jpeg;base64,", ""),
+            type: "base64"
+        }
+            const res = await fetch("https://api.imgur.com/3/upload", {
+                method: "POST",
+                headers: {
+                    Authorization: `Client-ID ${process.env.REACT_APP_IMAGUR_ID}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            const imagurData = (await res.json()).data;
+    }
+
     public render(): React.ReactNode {
         return (
             <React.Fragment>
                 <header>
                     <h1>OWOINDIE GENERATOR</h1>
+                    <div className="share-button" onClick={this.sendToDiscordWebhook.bind(this)}>
+                        <h6>Share to DOTMA</h6>
+                    </div>
                 </header>
                 <Container fluid={true}>
                     <Row>
