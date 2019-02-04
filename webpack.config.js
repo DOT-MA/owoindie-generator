@@ -5,10 +5,15 @@ const dotenv = require("dotenv");
 
 const env = dotenv.config().parsed;
 
-const envVars = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-}, {});
+let envVars;
+if (env) {
+    envVars = Object.keys(env).reduce((prev, next) => {
+        prev[`process.env.${next}`] = JSON.stringify(env[next]);
+        return prev;
+    }, {});
+}
+
+const plugins = env ? [new webpack.DefinePlugin(envVars)] : [];
 
 module.exports = {
     entry: {
@@ -35,7 +40,5 @@ module.exports = {
         modules: ["node_modules", path.resolve(__dirname, "./src")],
       },
     mode: "development",
-    plugins: [
-        new webpack.DefinePlugin(envVars),
-    ]
+    plugins,
 };
