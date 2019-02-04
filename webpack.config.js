@@ -3,22 +3,15 @@ const webpack = require('webpack');
 const path = require("path");
 const dotenv = require("dotenv");
 
-const env = dotenv.config().parsed;
+const env = dotenv.config().parsed ? dotenv.config().parsed : {
+    REACT_APP_DISCORD_WEBHOOK: env.REACT_APP_IMAGUR_ID,
+    REACT_APP_IMAGUR_ID: env.REACT_APP_IMAGUR_ID,
+};
 
-let envVars;
-if (env) {
-    envVars = Object.keys(env).reduce((prev, next) => {
-        prev[`process.env.${next}`] = JSON.stringify(env[next]);
-        return prev;
-    }, {});
-} else {
-    envVars = {
-        "process.env": {
-            REACT_APP_DISCORD_WEBHOOK: process.env.REACT_APP_IMAGUR_ID,
-            REACT_APP_IMAGUR_ID: process.env.REACT_APP_IMAGUR_ID,
-        }
-    }
-}
+const envVars = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+}, {});
 
 module.exports = {
     entry: {
