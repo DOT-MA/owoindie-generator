@@ -75,12 +75,17 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
             });
             const imagurData = (await res.json()).data;
             const embedData = {
+                username: "OWOINDIE",
+                avatar_url: "https://raw.githubusercontent.com/DOT-MA/dotma-resources/master/images/alex/owoindie.jpg",
                 embeds: [
                     {
                         title: "OWO WHAT'S THIS",
+                        description: "WHO DID THIS LMAO!!",
+                        url: "https://owoindie-generator.herokuapp.com/",
                         image: {
                             url: imagurData.link,
-                        }
+                        },
+                        timestamp: new Date(),
                     }
                 ]
             }

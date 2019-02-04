@@ -22,9 +22,13 @@ main > header {
     .share-button {
         height: 100%;
         margin-right: 50px;
+        padding: 10px;
         cursor: pointer;
         h6 {
             font-size: 1em;
+        }
+        &:hover {
+            background-color: #da5c5c;
         }
         .centerYFlex;
     }
@@ -33,7 +37,8 @@ main > header {
 
 .panel {
     height: calc(100vh - 50px);
-    overflow: auto;
+    overflow: scroll;
+    padding-right: 10px;
 }
 
 .part-grouping {
@@ -98,3 +103,12 @@ main > header {
     }
     .centerXYFlex;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: #fb6363;
+  }

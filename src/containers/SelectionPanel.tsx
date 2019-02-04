@@ -28,7 +28,7 @@ export default class SelectionPanel extends React.Component<CallbackMethods & Re
                     selectedParts={this.props.selectedParts} tabColour="#CCAAEE"
                 />
                 <PartGrouping groupName="Lower_face_accessories" onPartSelect={this.props.onPartSelect}
-                    selectedParts={this.props.selectedParts} tabColour="#CCAAEE"
+                    selectedParts={this.props.selectedParts} tabColour="#EEBFAA"
                 />
                 <PartGrouping groupName="Mouth" onPartSelect={this.props.onPartSelect}
                     selectedParts={this.props.selectedParts} tabColour="#A7CEC1"
