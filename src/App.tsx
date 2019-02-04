@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import mergeImages from "merge-images";
 
 import {Container, Row, Col} from "react-bootstrap";
-import mergeImages from "merge-images";
 import { RenderingPanelProps, GroupIndexMapping } from "./SharedTypes";
 
 import SelectionPanel from "./containers/SelectionPanel"
@@ -74,6 +74,23 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
                 body: JSON.stringify(data),
             });
             const imagurData = (await res.json()).data;
+            const embedData = {
+                embeds: [
+                    {
+                        title: "OWO WHAT'S THIS",
+                        image: {
+                            url: imagurData.link,
+                        }
+                    }
+                ]
+            }
+            fetch(process.env.REACT_APP_DISCORD_WEBHOOK, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(embedData),
+            });
     }
 
     public render(): React.ReactNode {
