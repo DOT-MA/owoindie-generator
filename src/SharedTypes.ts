@@ -7,6 +7,7 @@ export type OwoindiePartData = {
     partName: string;
     partPath: string;
     groupName: string;
+    zIndex: number;
 }
 
 export type RenderingPanelProps = {

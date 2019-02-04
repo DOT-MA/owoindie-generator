@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import {Container, Row, Col} from "react-bootstrap";
 import { RenderingPanelProps } from "./SharedTypes";
+import { RenderingPanelProps, GroupIndexMapping } from "./SharedTypes";
 
 import SelectionPanel from "./containers/SelectionPanel"
 import RenderingPanel from "./containers/RenderingPanel"
@@ -15,11 +16,13 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
                 partName: "base",
                 partPath: "base/owoindie-base.png",
                 groupName: "base",
+                zIndex: 1,
             },
             {
                 partName: "defaultbg",
                 partPath: "base/owoindie-base.jpg",
                 groupName: "defaultbg",
+                zIndex: -1,
             }],
         }
     }
@@ -38,6 +41,7 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
                 partName: name,
                 partPath: path,
                 groupName: group,
+                zIndex: GroupIndexMapping[group.toUpperCase()],
             }
         ]
         this.setState({

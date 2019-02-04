@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RenderingPanelProps, GroupIndexMapping } from "../SharedTypes";
+import { RenderingPanelProps } from "../SharedTypes";
 
 export default class SelectionPanel extends React.Component<RenderingPanelProps, {}> {
     public constructor(props) {
@@ -16,7 +16,7 @@ export default class SelectionPanel extends React.Component<RenderingPanelProps,
                                 <img
                                     src={elem.partPath}
                                     key={elem.partName}
-                                    style={{zIndex: GroupIndexMapping[elem.groupName.toUpperCase()]}}
+                                    style={{zIndex: elem.zIndex}}
                                 />
                             )
                         })

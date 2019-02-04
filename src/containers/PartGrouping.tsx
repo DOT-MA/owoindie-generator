@@ -75,6 +75,7 @@ export default class SelectionPanel extends React.Component<GroupProps & Callbac
                             partPath={elem.partPath}
                             groupName={this.props.groupName}
                             onPartSelect={this.props.onPartSelect}
+                            zIndex={elem.zIndex}
                             isSelected={this.isSelected(elem)}
                         />
                     </Col>
