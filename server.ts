@@ -5,6 +5,9 @@ import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as http from "http";
 import lessMiddleware = require("less-middleware");
+import {config as dotenvConfig} from "dotenv";
+
+dotenvConfig();
 
 export const app = express();
 
