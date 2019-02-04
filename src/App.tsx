@@ -13,8 +13,13 @@ export default class App extends React.Component<{}, RenderingPanelProps> {
         this.state = {
             selectedParts: [{
                 partName: "base",
-                partPath: "base/owoindie-base.jpg",
+                partPath: "base/owoindie-base.png",
                 groupName: "base",
+            },
+            {
+                partName: "defaultbg",
+                partPath: "base/owoindie-base.jpg",
+                groupName: "defaultbg",
             }],
         }
     }
