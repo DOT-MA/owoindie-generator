@@ -11,9 +11,14 @@ if (env) {
         prev[`process.env.${next}`] = JSON.stringify(env[next]);
         return prev;
     }, {});
+} else {
+    envVars = {
+        "process.env": {
+            REACT_APP_DISCORD_WEBHOOK: process.env.REACT_APP_IMAGUR_ID,
+            REACT_APP_IMAGUR_ID: process.env.REACT_APP_IMAGUR_ID,
+        }
+    }
 }
-
-const plugins = env ? [new webpack.DefinePlugin(envVars)] : [];
 
 module.exports = {
     entry: {
@@ -40,5 +45,7 @@ module.exports = {
         modules: ["node_modules", path.resolve(__dirname, "./src")],
       },
     mode: "development",
-    plugins,
+    plugins: [
+        new webpack.DefinePlugin(envVars)
+    ]
 };
